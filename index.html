@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sample Galleries | Aftershoot Galleries</title>
+  <meta name="description" content="Delivery galleries photographers and clients actually get excited about. Peek at a few, sorted by genre." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --surface-1: #ffffff;
+      --type-1: #474747;
+      --type-2: #71717a;
+      --tab-inactive: #919191;
+      --tab-edge: #27272a;
+      --edge-5: #e2e2e2;
+      --edge-6: #e4e4e7;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --secondary-bg: rgba(37, 99, 235, 0.12);
+      --secondary-bg-hover: rgba(37, 99, 235, 0.18);
+      --page-max: 1262px;
+
+      --gutter: 60px;
+      --grid-gap: 40px;
+      --grid-cols: 2;
+      /* 551×659 card minus 16px gap + 48px meta → cover 551×595 */
+      --cover-ratio: 551 / 595;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body {
+      margin: 0;
+      background: var(--surface-1);
+      color: var(--type-1);
+      font-family: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, video { display: block; max-width: 100%; }
+
+    .container { width: 100%; max-width: var(--page-max); margin: 0 auto; }
+
+    /* ---------- Header ---------- */
+    .site-header {
+      background: var(--surface-1);
+      border-bottom: 0.5px solid var(--edge-6);
+    }
+    .site-header .container {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px var(--gutter);
+    }
+    .logo { position: relative; width: 137px; height: 32px; flex-shrink: 0; }
+    .logo img { position: absolute; }
+    .logo .logo-mark { top: 17.39%; bottom: 17.39%; left: 6.6%; right: 77.16%; width: 22.254px; height: 20.87px; }
+    .logo .logo-word { top: 28.26%; bottom: 28.26%; left: 28.93%; right: 8.12%; width: 86.2335px; height: 13.913px; }
+
+    .actions { display: flex; gap: 10px; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 44px; padding: 10px 20px; border-radius: 9999px; border: 1px solid transparent;
+      font-size: 14px; line-height: 20px; font-weight: 500; white-space: nowrap;
+      transition: background-color .15s;
+    }
+    .btn-secondary { background: var(--secondary-bg); color: var(--primary); }
+    .btn-secondary:hover { background: var(--secondary-bg-hover); }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn:focus-visible, .tab:focus-visible, .card:focus-visible, .social a:focus-visible {
+      outline: 2px solid var(--primary); outline-offset: 3px;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero .container {
+      display: flex; align-items: center; gap: 20px;
+      padding: 40px var(--gutter);
+    }
+    .hero-copy {
+      flex: 1 1 0; min-width: 0;
+      display: flex; flex-direction: column; justify-content: flex-end; gap: 36px;
+    }
+    .hero-text { display: flex; flex-direction: column; gap: 16px; }
+    .hero h1 { margin: 0; font-weight: 500; font-size: 48px; line-height: 56px; color: var(--type-1); }
+    .hero-sub {
+      margin: 0; font-weight: 500; font-size: 20px; line-height: 24px; color: var(--type-2);
+      max-width: 34em;
+    }
+    .hero .actions { display: none; }
+    .hero-media { flex: 1 1 0; min-width: 0; }
+    .hero-media video { width: 100%; aspect-ratio: 723.5 / 722; object-fit: cover; background: #f4f4f5; }
+
+    /* ---------- Genre tabs ---------- */
+    .genre-nav {
+      position: sticky; top: 0; z-index: 10;
+      background: var(--surface-1);
+    }
+    .genre-nav .container { padding: 20px var(--gutter); }
+    .tabs { display: flex; gap: 12px; align-items: center; overflow-x: auto; scrollbar-width: none; }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      padding: 6px 4px;
+      border-bottom: 1px solid transparent;
+      font-size: 11px; line-height: 12px; font-weight: 600;
+      letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap;
+      color: var(--tab-inactive);
+      transition: color .15s, border-color .15s;
+    }
+    .tab:hover { color: var(--type-1); }
+    .tab[aria-current="true"] { color: var(--type-1); border-bottom-color: var(--tab-edge); }
+
+    /* ---------- Sections ---------- */
+    .section-header .container {
+      display: flex; flex-direction: column; gap: 6px;
+      padding: 20px var(--gutter);
+    }
+    .section-header h2 { margin: 0; font-size: 30px; line-height: 32px; font-weight: 500; color: var(--type-1); }
+    .section-desc { margin: 0; font-size: 16px; line-height: 20px; color: var(--type-1); }
+
+    .gallery-row { border-bottom: 1px solid var(--edge-5); }
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+      gap: var(--grid-gap);
+      padding: 40px var(--gutter);
+    }
+
+    .card { display: flex; flex-direction: column; gap: 16px; }
+    .card-cover { position: relative; overflow: hidden; aspect-ratio: var(--cover-ratio); background: #f4f4f5; }
+    .card-cover > img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+    .card:hover .card-cover > img { transform: scale(1.03); }
+    .view-pill {
+      position: absolute; right: 16px; bottom: 16px;
+      display: flex; align-items: center; gap: 4px;
+      padding: 6px 10px; border-radius: 9999px;
+      background: var(--surface-1); color: var(--type-1);
+      font-size: 13px; line-height: 16px;
+      transition: box-shadow .2s;
+    }
+    .card:hover .view-pill { box-shadow: 0 4px 12px rgba(0,0,0,.18); }
+
+    .card-meta { display: flex; align-items: center; gap: 8px; }
+    .avatar {
+      width: 48px; height: 48px; flex-shrink: 0;
+      border-radius: 50%; overflow: hidden;
+      background: #fff; border: 0.5px solid var(--edge-6);
+      display: grid; place-items: center;
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: contain; padding: 9px; }
+    .avatar.is-wide img { padding: 5px; }
+    .card-meta-text { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .card-name { font-size: 16px; line-height: 20px; color: var(--type-1); }
+    .card-by {
+      font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.5px;
+      text-transform: uppercase; color: var(--type-2);
+    }
+
+    /* ---------- Footer ---------- */
+    .site-footer { border-top: 0.5px solid var(--edge-6); }
+    .site-footer .container {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 20px var(--gutter);
+    }
+    .copyright { margin: 0; font-size: 14px; line-height: 20px; color: var(--type-2); }
+    .social { display: flex; gap: 7px; align-items: center; }
+    .social a { display: block; width: 20px; height: 20px; opacity: .85; transition: opacity .15s; }
+    .social a:hover { opacity: 1; }
+
+    section[id] { scroll-margin-top: 64px; }
+
+    /* ---------- Tablet ---------- */
+    @media (max-width: 1023px) {
+      :root { --gutter: 32px; --grid-gap: 24px; }
+      .hero h1 { font-size: 40px; line-height: 48px; }
+      .hero-sub { font-size: 18px; line-height: 24px; }
+    }
+
+    /* ---------- Phone ---------- */
+    @media (max-width: 767px) {
+      :root { --gutter: 16px; --grid-gap: 24px; --grid-cols: 1; --cover-ratio: 343 / 371; }
+
+      .site-header .container { justify-content: center; padding: 16px 16px 20px; }
+      .site-header .actions { display: none; }
+
+      .hero .container { flex-direction: column; align-items: stretch; gap: 20px; padding: 24px 16px; }
+      .hero-media { order: -1; }
+      .hero-copy { gap: 16px; }
+      .hero h1 { font-size: 30px; line-height: 32px; }
+      .hero-sub { font-size: 14px; line-height: 20px; font-weight: 400; }
+      .hero .actions { display: flex; flex-direction: column; align-items: stretch; }
+      .hero .actions .btn { width: 100%; }
+
+      .genre-nav .container { padding: 12px 16px; }
+      .section-header .container { gap: 12px; padding: 16px; }
+      .gallery-grid { padding: 16px; }
+
+      .site-footer .container { flex-direction: column; justify-content: center; text-align: center; }
+
+      section[id] { scroll-margin-top: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="https://aftershoot.com" target="_blank" rel="noopener" aria-label="Aftershoot">
+        <img class="logo-mark" src="assets/logo-mark.png" width="22.254" height="20.87" alt="" />
+        <img class="logo-word" src="assets/logo-wordmark.svg" width="86.2335" height="13.913" alt="" />
+      </a>
+      <div class="actions">
+        <a class="btn btn-secondary" href="#weddings">Explore Samples</a>
+        <a class="btn btn-primary" href="https://aftershoot.com/galleries">Create Your Gallery</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="hero-copy">
+          <div class="hero-text">
+            <h1>Your photos deserve<br />a big entrance.</h1>
+            <p class="hero-sub">Delivery galleries photographers and clients actually get excited about. Peek at a few, sorted by genre.</p>
+          </div>
+          <div class="actions">
+            <a class="btn btn-secondary" href="#weddings">Explore Samples</a>
+            <a class="btn btn-primary" href="https://aftershoot.com/galleries">Create Your Gallery</a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <video src="assets/hero.mp4" poster="assets/hero-poster.jpg" autoplay muted loop playsinline preload="auto" aria-label="Aftershoot Galleries cover, grid and store features"></video>
+        </div>
+      </div>
+    </section>
+
+    <div class="genre-nav">
+      <div class="container">
+        <nav class="tabs" aria-label="Genres"></nav>
+      </div>
+    </div>
+
+    <div id="sections"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="copyright">2026, Aftershoot Pvt Ltd. All Rights Reserved</p>
+      <div class="social">
+        <a href="https://www.facebook.com/aftershootco" target="_blank" rel="noopener" aria-label="Aftershoot on Facebook"><img src="assets/icon-facebook.svg" width="20" height="20" alt="" /></a>
+        <a href="https://www.instagram.com/aftershoot.co" target="_blank" rel="noopener" aria-label="Aftershoot on Instagram"><img src="assets/icon-instagram.svg" width="20" height="20" alt="" /></a>
+        <a href="https://www.threads.net/@aftershoot.co" target="_blank" rel="noopener" aria-label="Aftershoot on Threads"><img src="assets/icon-threads.svg" width="20" height="20" alt="" /></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const BASE = "https://aftershootgalleriesstudio.gallery.aftershoot.com/";
+
+    // Each gallery's avatar is the photographer logo attached to that gallery.
+    const LOGOS = {
+      eg: { src: "assets/logo-eg.png", alt: "EG logo", wide: false },
+      maddy: { src: "assets/logo-maddy.png", alt: "Maddness Photography logo", wide: true },
+    };
+
+    const GENRES = [
+      {
+        id: "weddings",
+        title: "Weddings",
+        desc: "Timeless days, delivered with the care they deserve",
+        galleries: [
+          { name: "Forever Begins Here", by: "Wedding", slug: "forever-begins-here", cover: "assets/cover-forever-begins-here.jpg", logo: "eg" },
+          { name: "Savannah & Sean", by: "Wedding", slug: "wedding-gallery", cover: "assets/cover-savannah-sean.jpg", logo: "maddy" },
+          { name: "Kaiya & Drew", by: "Engagement", slug: "gallery", cover: "assets/cover-kaiya-drew.jpg", logo: "maddy" },
+        ],
+      },
+      {
+        id: "portraits",
+        title: "Portraits",
+        desc: "Quite considered portraits and personal branding",
+        galleries: [
+          { name: "Portrait Sample Gallery", by: "Portrait session", slug: "portrait-sample-gallery", cover: "assets/cover-portrait-sample.jpg", logo: "eg" },
+          { name: "SWEL Headshots", by: "Headshot happy hours", slug: "savannah-sean", cover: "assets/cover-swel.jpg", logo: "maddy" },
+        ],
+      },
+    ];
+
+    const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+    document.getElementById("sections").innerHTML = GENRES.map((g) => `
+      <section id="${g.id}" aria-labelledby="${g.id}-title">
+        <div class="section-header">
+          <div class="container">
+            <h2 id="${g.id}-title">${esc(g.title)}</h2>
+            <p class="section-desc">${esc(g.desc)}</p>
+          </div>
+        </div>
+        <div class="gallery-row">
+          <div class="container gallery-grid">
+            ${g.galleries.map((c) => {
+              const logo = LOGOS[c.logo];
+              return `
+              <a class="card" href="${BASE}${c.slug}" target="_blank" rel="noopener" aria-label="Open ${esc(c.name)} gallery in a new tab">
+                <div class="card-cover">
+                  <img src="${c.cover}" alt="${esc(c.name)} cover" loading="lazy" />
+                  <span class="view-pill">View Gallery <img src="assets/icon-arrow-up-right.svg" width="16" height="16" alt="" /></span>
+                </div>
+                <div class="card-meta">
+                  <span class="avatar${logo.wide ? " is-wide" : ""}"><img src="${logo.src}" alt="${esc(logo.alt)}" /></span>
+                  <span class="card-meta-text">
+                    <span class="card-name">${esc(c.name)}</span>
+                    <span class="card-by">${esc(c.by)}</span>
+                  </span>
+                </div>
+              </a>`;
+            }).join("")}
+          </div>
+        </div>
+      </section>`).join("");
+
+    document.querySelector(".tabs").innerHTML =
+      GENRES.map((g) => `<a class="tab" href="#${g.id}">${esc(g.title)}</a>`).join("");
+
+    const setActive = (id) => {
+      document.querySelectorAll(".tab").forEach((t) => {
+        t.setAttribute("aria-current", t.getAttribute("href") === "#" + id ? "true" : "false");
+      });
+    };
+    setActive(GENRES[0].id);
+
+    // Highlight the tab of whichever genre section is under the top of the viewport.
+    const sections = GENRES.map((g) => document.getElementById(g.id));
+    const onScroll = () => {
+      const line = window.innerHeight * 0.35;
+      let current = GENRES[0].id;
+      for (const s of sections) if (s.getBoundingClientRect().top <= line) current = s.id;
+      setActive(current);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      document.querySelector(".hero-media video").pause();
+    }
+  </script>
+</body>
+</html>
